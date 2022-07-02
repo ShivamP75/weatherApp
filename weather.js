@@ -1,13 +1,22 @@
 let weather = {
     apiKey : "5a4ab77f93d63145d70db9e01981adbe",
 
-    fetchWeather : async function (city){
-        url =  "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&units=metric&appid=" + this.apiKey;
-        let x = await fetch(url);
-        let y = await x.json();
-        this.displayWeather(y);
-    },
-
+    fetchWeather: function (city) {
+        fetch(
+          "https://api.openweathermap.org/data/2.5/weather?q=" +
+            city +
+            "&units=metric&appid=" +
+            this.apiKey
+        )
+          .then((response) => {
+            if (!response.ok) {
+              alert("No weather found.");
+              throw new Error("No weather found.");
+            }
+            return response.json();
+          })
+          .then((data) => this.displayWeather(data));
+      },
     displayWeather: function (data) {
         // console.log(data[0].name);
       const { name } = data[0];
