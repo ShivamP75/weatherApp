@@ -55,4 +55,4 @@ let weather = {
       }
     });
   
-  weather.fetchWeather("Delhi");
+  weather.fetchWeather("Gwalior");
